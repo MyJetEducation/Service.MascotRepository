@@ -19,5 +19,8 @@ namespace Service.UserMascotRepository.Settings
 
 		[YamlProperty("UserMascotRepository.KeyUserMascot")]
 		public string KeyUserMascot { get; set; }
+
+		[YamlProperty("UserMascotRepository.ServiceBusReader")]
+		public string ServiceBusReader { get; set; }
 	}
 }
