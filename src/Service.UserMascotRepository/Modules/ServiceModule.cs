@@ -6,6 +6,7 @@ using MyServiceBus.TcpClient;
 using Service.ServerKeyValue.Client;
 using Service.ServiceBus.Models;
 using Service.UserMascotRepository.Jobs;
+using Service.UserMascotRepository.Services;
 
 namespace Service.UserMascotRepository.Modules
 {
@@ -20,6 +21,7 @@ namespace Service.UserMascotRepository.Modules
 			MyServiceBusTcpClient serviceBusClient = builder.RegisterMyServiceBusTcpClient(Program.ReloadedSettings(e => e.ServiceBusReader), Program.LogFactory);
 			builder.RegisterMyServiceBusSubscriberBatch<NewMascotProductServiceBusModel>(serviceBusClient, NewMascotProductServiceBusModel.TopicName, QueueName, TopicQueueType.Permanent);
 
+			builder.RegisterType<UserMascotRepositoryService>().AsImplementedInterfaces().SingleInstance();
 			builder.RegisterType<NewMascotProductNotificator>().AutoActivate().SingleInstance();
 		}
 	}
