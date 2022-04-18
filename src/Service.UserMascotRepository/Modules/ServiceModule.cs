@@ -19,7 +19,7 @@ namespace Service.UserMascotRepository.Modules
 			builder.RegisterServerKeyValueClient(Program.Settings.ServerKeyValueServiceUrl, Program.LogFactory.CreateLogger(typeof(ServerKeyValueClientFactory)));
 
 			MyServiceBusTcpClient serviceBusClient = builder.RegisterMyServiceBusTcpClient(Program.ReloadedSettings(e => e.ServiceBusReader), Program.LogFactory);
-			builder.RegisterMyServiceBusSubscriberBatch<NewMascotProductServiceBusModel>(serviceBusClient, NewMascotProductServiceBusModel.TopicName, QueueName, TopicQueueType.Permanent);
+			builder.RegisterMyServiceBusSubscriberBatch<MarketProductPurchasedServiceBusModel>(serviceBusClient, MarketProductPurchasedServiceBusModel.TopicName, QueueName, TopicQueueType.Permanent);
 
 			builder.RegisterType<UserMascotRepositoryService>().AsImplementedInterfaces().SingleInstance();
 			builder.RegisterType<NewMascotProductNotificator>().AutoActivate().SingleInstance();
